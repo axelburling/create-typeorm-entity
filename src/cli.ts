@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import arg from 'arg';
 import inquirer from 'inquirer';
 import pkg from '../package.json';
@@ -226,48 +228,7 @@ const Input = async(): Promise<IEntity> => {
 }
 
 
-// (async() => {
-//     const template = await genEntity({
-//         name: 'User',
-//         columns: [
-//           { idx: 0, name: 'id', isPrimaryKey: true, primaryKeyType: 'uuid' },
-//           {
-//             idx: 1,
-//             name: 'name',
-//             isPrimaryKey: false,
-//             columnType: 'varchar',
-//             columnLength: 255,
-//             columnUnique: false,
-//             columnDefault: '',
-//             columnNullable: false
-//           },
-//           {
-//             idx: 2,
-//             name: 'password',
-//             isPrimaryKey: false,
-//             columnType: 'varchar',
-//             columnLength: 255,
-//             columnUnique: false,
-//             columnDefault: '',
-//             columnNullable: false
-//           },
-//           {
-//             idx: 3,
-//             name: 'email',
-//             isPrimaryKey: false,
-//             columnType: 'varchar',
-//             columnLength: 255,
-//             columnUnique: false,
-//             columnDefault: '',
-//             columnNullable: false
-//           }
-//         ]
-//       })
-//       console.log(template) 
-// })()
-
-
-const cli = async(args: string[]) => {
+export const cli = async(args: string[]) => {
     const arg = Args(args);
     let dir = ''
     if(arg['--input']) {
@@ -281,4 +242,4 @@ const cli = async(args: string[]) => {
     console.log(entity);
 }
 
-cli(process.argv);
+process.env.NODE_ENV == 'development' ? cli(process.argv) : null ;
